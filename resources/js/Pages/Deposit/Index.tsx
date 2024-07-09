@@ -25,9 +25,10 @@ const columns = [
     {
         name: 'Status',
         selector: (row: DepositType) => {
-            const status = listStatus[row.status]
+            const statId = parseInt(row.status)
+            const status = listStatus[statId]
 
-            return <div className={clsx('px-3 py-2 rounded-xl text-white', status.color)}>{DepositLabel[row.status]}</div>
+            return <div className={clsx('px-3 py-2 rounded-xl text-white', status.color)}>{DepositLabel[statId]}</div>
         },
     },
     {

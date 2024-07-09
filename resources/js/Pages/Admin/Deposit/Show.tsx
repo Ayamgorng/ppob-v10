@@ -3,12 +3,10 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 import Card from '@/Components/Card'
 import clsx from 'clsx';
 import { formatDate, listStatus, rupiah } from '@/libs/BaseHelper';
-import axios from 'axios';
 import { router } from '@inertiajs/react';
 import DepositType, { DepositLabel, DepositStat } from '@/types/deposit';
 import TextInput from '@/Components/TextInput';
 import ImagePreview from '@/Components/ImagePreview';
-import { toast } from 'react-toastify';
 import { PageProps } from '@/types';
 import Api from '@/libs/Api';
 
@@ -43,9 +41,9 @@ export default function Show({ data, deposit }: ShowProps & PageProps) {
         setFile(event.target.files[0]);
     };
 
-    const onSubmit = async (stat: number) => {
+    const onSubmit = async (stat: string) => {
         setLoading(true)
-        const res = await Api.put(`/admin/deposit/${deposit.id}`, {stat})
+        const res = await Api.put(`/admin/deposit/${deposit.id}`, { stat })
         if (res) {
             router.get('/admin/deposit')
             return;
@@ -65,7 +63,8 @@ export default function Show({ data, deposit }: ShowProps & PageProps) {
             break;
     }
 
-    const status = listStatus[deposit.status];
+    const statId = parseInt(deposit.status)
+    const status = listStatus[statId];
 
     return (
         <AuthenticatedLayout
@@ -86,7 +85,7 @@ export default function Show({ data, deposit }: ShowProps & PageProps) {
 
                     <ItemData label='Nominal' value={rupiah(deposit.nominal)} />
 
-                    <ItemData label='Status' value={<div className={clsx('px-4 py-2 rounded-xl text-white', status.color)}>{DepositLabel[deposit.status]}</div>} />
+                    <ItemData label='Status' value={<div className={clsx('px-4 py-2 rounded-xl text-white', status.color)}>{DepositLabel[statId]}</div>} />
 
                     {
                         [DepositStat.waiting_payment, DepositStat.waiting_approval].includes(deposit.status) &&

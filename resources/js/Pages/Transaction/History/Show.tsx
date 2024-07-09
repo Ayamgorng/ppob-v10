@@ -38,7 +38,7 @@ type ShowProps = {
 export default function Show({ data, transaction, category }: PageProps & ShowProps) {
   const [loading, setLoading] = useState(false)
 
-  const status: StatusType = listStatus[transaction.status];
+  const status: StatusType = listStatus[parseInt(transaction.status)];
 
   const onSubmit = async (type: number) => {
     setLoading(true)

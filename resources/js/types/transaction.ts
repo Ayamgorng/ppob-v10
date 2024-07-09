@@ -7,7 +7,7 @@ export default interface TransactionType {
     note: string
     mtrpln: string
     target: string
-    status: number
+    status: string
     token: string
     created_at: string
     created_at_formatted: string
@@ -20,8 +20,8 @@ export type StatusType = {
 }
 
 export const TrsansactionStat = {
-    failed: 0,
-    process: 1,
-    success: 2,
-    waiting_payment: 3
+    failed: '0',
+    process: '1',
+    success: '2',
+    waiting_payment: '3'
 }

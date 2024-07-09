@@ -86,7 +86,8 @@ export default function Show({ data, deposit }: ShowProps & PageProps) {
             break;
     }
 
-    const status = listStatus[deposit.status];
+    const statId = parseInt(deposit.status)
+    const status = listStatus[statId];
 
     return (
         <AuthenticatedLayout
@@ -107,7 +108,7 @@ export default function Show({ data, deposit }: ShowProps & PageProps) {
 
                     <ItemData label='Nominal' value={rupiah(deposit.nominal)} />
 
-                    <ItemData label='Status' value={<div className={clsx('px-4 py-2 rounded-xl text-white', status.color)}>{DepositLabel[deposit.status]}</div>} />
+                    <ItemData label='Status' value={<div className={clsx('px-4 py-2 rounded-xl text-white', status.color)}>{DepositLabel[statId]}</div>} />
 
                     {
                         deposit.status === DepositStat.waiting_payment &&
@@ -122,7 +123,7 @@ export default function Show({ data, deposit }: ShowProps & PageProps) {
                         <div className='dark:text-white mb-10 text-xl'>Upload Transfer Evidence</div>
 
                         {
-                            deposit.status == DepositStat.waiting_payment &&
+                            deposit.status === DepositStat.waiting_payment &&
                             <TextInput type='file' accept='image/*' onChange={handleInputChange} className='w-full md:w-1/2 mb-2' />
                         }
                         <div id='galleryID'>
@@ -133,7 +134,7 @@ export default function Show({ data, deposit }: ShowProps & PageProps) {
                     </div>
 
                     {
-                        deposit.status == DepositStat.waiting_payment &&
+                       deposit.status === DepositStat.waiting_payment &&
                         <div className='p-3 mt-5 flex gap-x-8 justify-between'>
                             <BtnSubmit label='Upload' loading={loading} disabled={!file} onClick={() => onSubmit()} className={clsx('bg-green-500', (!loading && file) && 'hover:bg-green-600')} />
                         </div>

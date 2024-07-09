@@ -26,7 +26,7 @@ export default function Index({ data }: PageProps) {
     {
       name: 'Status',
       selector: (row: Transaction) => {
-        const status = listStatus[row.status]
+        const status = listStatus[parseInt(row.status)]
 
         return <div className={clsx('px-3 py-2 rounded-xl text-white', status.color)}>{status.label}</div>
       },

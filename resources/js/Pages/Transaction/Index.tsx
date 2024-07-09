@@ -64,7 +64,7 @@ export default function Index({ data, models }: PageProps & { models: CategoryTy
           {rupiah(data?.user?.saldo || 0)}
         </div>
 
-        <PrimaryButton className='py-4' onClick={() => router.get('/deposit/create')}>
+        <PrimaryButton className='py-4 flex items-center' onClick={() => router.get('/deposit/create')}>
           <FaPlus />&nbsp;Topup
         </PrimaryButton>
       </Card>

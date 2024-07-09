@@ -13,12 +13,12 @@ const columns = [
     },
     {
         name: 'Price',
-        selector: (row: ProductType) => row.total ? rupiah(row.total) : '',
+        selector: (row: ProductType) => row.total > 0 ? rupiah(row.total) : '',
     },
     {
         name: 'Status',
         selector: (row: ProductType) => {
-            return <div className={clsx('px-3 py-2 rounded-lg text-white', row.status ? 'bg-green-500' : 'bg-red-500')}>{row.status_name}</div>
+            return <div className={clsx('px-3 py-2 rounded-lg text-white', row.status_name === 'Active' ? 'bg-green-500' : 'bg-red-500')}>{row.status_name}</div>
         },
     },
 ];
